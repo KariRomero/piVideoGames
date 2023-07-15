@@ -1,5 +1,7 @@
 require('dotenv').config();
 const { Sequelize } = require('sequelize');
+const genresModel = require ('./models/Genres');
+const videogamesModel = require ('./models/Videogames');
 const fs = require('fs');
 const path = require('path');
 const {
@@ -30,6 +32,12 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
+
+//
+genresModel(sequelize);
+videogamesModel(sequelize);
+
+
 const { Videogames, Genres } = sequelize.models;
 
 // Aca vendrian las relaciones
