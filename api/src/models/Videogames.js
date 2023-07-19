@@ -5,9 +5,9 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('Videogames', {
     id:{
-      type: DataTypes.STRING,
+      type: DataTypes.UUID,
       primaryKey: true,
-      allowNull:false,
+      defaulValue: DataTypes.UUIDV4,
     },
     name: {
       type: DataTypes.STRING,

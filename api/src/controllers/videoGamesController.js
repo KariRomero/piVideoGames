@@ -1,12 +1,25 @@
-const getVideoGamesController = (req,res) => {
-    const { name } = req.query;
-    if(name) res.send (`NIY: Esta ruta debe obtener los primeros 15 videojuegos que se encuentren con la palabra recibida por query: ${name}`)
-    else res.send('NIY: Obtiene un arreglo de objetos, donde cada objeto es un videojuego con su información.')
-};
+const axios = require('axios');
+require("dotenv").config();
+const {API_KEY} = process.env;
+const { Videogames } = require('../db')
 
-const getDetailController = (req,res) => {
-    const { idVideogame } = req.params;
-    res.send(`NIY:Esta ruta obtiene el detalle de un videojuego específico de id: ${idVideogame}`)
+
+
+const getAllVideogames = () => {};
+
+
+
+const searchByName = () => {}; 
+
+
+
+const getVideogameById = async (id,source) => {
+    const videoGame = 
+    source === 'Api' 
+    ?(await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)).data 
+    :await Videogames.findByPk(id);
+
+    return videoGame;
 };
 
 const postVideoGamesController = (req,res) => {
@@ -16,7 +29,8 @@ const postVideoGamesController = (req,res) => {
 };
 
 module.exports={
-    getVideoGamesController,
-    getDetailController,
+    getVideogameById,
+    searchByName,
+    getAllVideogames,
     postVideoGamesController
 };

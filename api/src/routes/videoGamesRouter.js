@@ -5,7 +5,7 @@ const { getVideoGamesHandler, getDetailHandler, postVideoGamesHandler } = requir
 const videoGamesRouter = Router();
 
 videoGamesRouter.get('/', getVideoGamesHandler);
-videoGamesRouter.get('/:idVideogame', getDetailHandler);
+videoGamesRouter.get('/:id', getDetailHandler);
 videoGamesRouter.post('/', postVideoGamesHandler);
 
 module.exports = videoGamesRouter
