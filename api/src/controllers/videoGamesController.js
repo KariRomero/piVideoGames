@@ -79,6 +79,16 @@ const getVideogameById = async (id,source) => {
     source === 'Api' 
     ?(await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)).data 
     :await Videogames.findByPk(id);
+       if(source==='Api'){
+        const { id, name, description, released, platforms, parent_platforms, background_image,rating,genres} = videoGame;
+        const platformVideogame = [platforms, parent_platforms]
+            .flatMap(platform => platform.map(p=>p.platform.name));
+
+        const genresVideogame = genres.map(g=>g.name);
+            
+        return {id, name, description, released, platformVideogame,background_image,rating, genresVideogame}
+
+       }
 
     return videoGame;
 };
