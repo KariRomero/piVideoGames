@@ -1,16 +1,77 @@
 const axios = require('axios');
 require("dotenv").config();
+const { Op } = require('sequelize');
 const {API_KEY} = process.env;
 const { Videogames } = require('../db')
 
+//////////////////////////////////
+const cleanArray = (arr) => {
+    return arr.map((elem) => {
+        const platforms = [elem.platforms, elem.parent_platforms]
+             .flatMap(platform => platform.map(p=>p.platform.name));
+
+        const genres = elem.genres.map(g=>g.name);
+        return{
+            id: elem.id,
+            name: elem.name,
+            description: elem.description,
+            platforms: platforms,
+            background_image: elem.background_image,
+            released: elem.released,
+            rating: elem.rating,
+            genres: genres
+        }
+    })
+};
+//////////////////////////////////
 
 
-const getAllVideogames = () => {};
+const getAllVideogames = async() => {
+    const dbVideogames = await Videogames.findAll();
+
+    const apiVideogames = (await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}`)).data.results;
+
+    const apiVideogamesClean = cleanArray(apiVideogames);
+
+    return [...dbVideogames, ...apiVideogamesClean];
+};
 
 
+// Por nombre: "https://api.rawg.io/api/games?search={game}"
+// const searchByName = async (name) => {
+//     const dbVideogames = await Videogames.findAll({ where: { name: name } });
+    
+//     const apiVideogames = (await axios.get(`https://api.rawg.io/api/games?search=${name}?key=${API_KEY}`)).data.results;
 
-const searchByName = () => {}; 
+//     const apiVideogamesClean = cleanArray(apiVideogames);
 
+//     return [...dbVideogames, ...apiVideogamesClean];
+
+// }; 
+
+const searchByName=async (name) => {
+    const dbVideogames = await Videogames.findAll({
+      where: {
+        name: {
+          [Op.iLike]: `%${name}%`
+        }
+      },
+      limit: 15
+    });
+
+    const apiVideogames = (await axios.get(`https://api.rawg.io/api/games?search=${name}&key=${API_KEY}`)).data.results;
+    
+    const apiVideogamesClean = cleanArray(apiVideogames);
+    
+    const filteredApi = apiVideogamesClean.filter((game) => game.name.toLowerCase().includes(name.toLowerCase()));
+    
+    const result = [...dbVideogames, ...filteredApi];
+
+    if (result.length === 0) {
+      return { message: `Ningún videojuego coincide con: '${name}'` };
+    }
+    return result.slice(0, 15);
+  };
 
 
 const getVideogameById = async (id,source) => {

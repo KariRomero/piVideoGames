@@ -1,13 +1,14 @@
 const {  getVideogameById, searchByName, getAllVideogames, postVideoGamesController} = require('../controllers/videoGamesController')
 
 
-const getVideoGamesHandler = (req,res)=>{
+const getVideoGamesHandler = async (req,res)=>{
     const { name } = req.query;
-    const results = name ? searchByName(name) : getAllVideogames() 
+    const results = name ?  await searchByName(name) : await getAllVideogames() 
 
-    if (name) res.sent('llamar a la funcion por nombre');
-    else res.send('quiero enviar todos los usuarios');
+    res.status(200).json(results);
 };
+
+
 
 const getDetailHandler = async (req,res) => {
     const { id } = req.params;
@@ -21,6 +22,8 @@ const getDetailHandler = async (req,res) => {
     }
     
 };
+
+
 
 
 const postVideoGamesHandler = postVideoGamesController; 
