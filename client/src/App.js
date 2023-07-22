@@ -1,9 +1,9 @@
 import './App.css';
 import { Route, Routes, useLocation } from 'react-router-dom';
-import Landing from './components/Landing/Landing';
+import Landing from './views/Landing/Landing';
 import Nav from './components/Nav/Nav';
-import Home from './components/Home/Home';
-import Detail from './components/Detail/Detail';
+import Home from './views/Home/Home';
+import Detail from './views/Detail/Detail';
 
 
 
