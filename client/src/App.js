@@ -7,10 +7,13 @@ import Detail from './views/Detail/Detail';
 
 
 
+
 function App() {
 
   const location = useLocation()
     const showNav = location.pathname !== '/';
+
+  
 
 
   return (

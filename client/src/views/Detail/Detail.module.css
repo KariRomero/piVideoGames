@@ -1,0 +1,31 @@
+.background{
+    background-color: rgb(25, 4, 44);
+    /* background-color: rgb(9, 9, 58); */
+    background-size: cover;
+    background-position: center;
+    height: 100vh;  
+    position: relative;
+    z-index: 1;
+    
+    
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.795);
+    width: 90%;
+    height: 80%;
+    margin-left: 5%;
+    margin-top: 5%;
+    position: absolute;
+    z-index: 2;        
+}
+
+.content{
+    background-color: brown;
+}
+
+.detail{
+    color: beige;
+}
