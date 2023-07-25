@@ -475,6 +475,7 @@ const Cards = () => {
         <div className={style.container}>
             {videogames && videogames.map(videogame=>{
                 return <Card
+                id={videogame.id}
                 name={videogame.name}
                 genres={videogame.genres}
                 image={videogame.background_image}                
