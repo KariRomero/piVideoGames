@@ -2,7 +2,7 @@ const axios = require('axios');
 require("dotenv").config();
 const { Op } = require('sequelize');
 const {API_KEY} = process.env;
-const { Videogames } = require('../db')
+const { Videogames, Genres } = require('../db')
 
 //////////////////////////////////
 const cleanArray = (arr) => {
@@ -93,15 +93,22 @@ const getVideogameById = async (id,source) => {
     return videoGame;
 };
 
-const postVideoGamesController = (req,res) => {
-    const { datosVideoGames } = req.body;
-    res.send(`NIY: esta ruta recibirá los siguientes datos para crear un videojuego y relacionarlo con los generos solicitados:
-    datos: ${datosVideoGames}`)
+const createVideogame = async (name, description, platforms, background_image, released, rating, genres) => {
+  const videogameCreate = await Videogames.findOrCreate({
+    where:
+    name,
+    description,
+    released,
+    rating,
+    platforms,
+    background_image,
+  })    
+  return videogameCreate[0].setGenres(genres)
 };
 
 module.exports={
     getVideogameById,
     searchByName,
     getAllVideogames,
-    postVideoGamesController
+    createVideogame
 };
