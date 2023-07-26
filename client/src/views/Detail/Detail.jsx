@@ -31,10 +31,23 @@ const Detail = () => {
 
                         
 
-                        <div className={style.detail}>{videogame.released}</div>                        
-                        <div className={style.detail}>{videogame.platformVideogame.join(', ')}</div>                        
-                        <div className={style.detail}>{videogame.genresVideogame.join(', ')}</div>
+                        <div className={style.detail}>{videogame.released}</div> 
                         <div className={style.detail}>Rating:{videogame.rating}</div>
+                        <div className={style.detail}>
+                        {
+                            videogame.platformVideogame && videogame.platformVideogame.join(', ')
+                        }
+                        </div>
+
+                        <div className={style.detail}>
+                        {
+                            videogame.genresVideogame && videogame.genresVideogame.join(', ')
+                        }
+                        </div>                    
+                        
+                        {/* <div className={style.detail}>{videogame.platformVideogame.join(', ')}</div>*/}
+                        {/* <div className={style.detail}>{videogame.genresVideogame.join(', ')}</div> */}
+                        
                                                 
                     </div>
 
@@ -46,3 +59,5 @@ const Detail = () => {
 };
 
 export default Detail;
+
+

@@ -12,7 +12,7 @@ const Card = (props) => {
             </div>
 
            
-            <div className={style.genre}>{props.genres}</div>
+            <div className={style.genre}>{props.genres.join(' - ')}</div>
 
             <Link to={`/detail/${id}`} className={style.link}>
             <div className={style.name}>{props.name}</div>

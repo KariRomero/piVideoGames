@@ -6,6 +6,10 @@ const Nav = () => {
     return(
         <div className={style.container}>
 
+            <Link to='/form' className={style.link}>
+                <button className={style.button}>New Game</button>
+            </Link>
+
             <Link to='/home' className={style.link}>
                 <button className={style.button}>Home</button>
             </Link>

@@ -1,0 +1,19 @@
+.background{
+    background-color: rgb(25, 4, 44);
+    /* background-color: rgb(9, 9, 58); */
+    background-size: cover;
+    background-position: center;
+    height: 100vh;  
+    position: relative;
+    z-index: 1;    
+}
+
+.form{
+    background-color: rgb(255, 255, 255);
+    margin-top: 10%;
+    margin-left: 20%;
+    
+    position: absolute;
+    
+    z-index: 2;
+}
