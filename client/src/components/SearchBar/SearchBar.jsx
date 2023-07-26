@@ -26,9 +26,6 @@ const SearchBar = () => {
             <input value={name} onChange={handleInputChange} type='search' className={style.input} placeholder='Search...'/>
             <button onClick={handleOnClick} className={style.button}>Search</button>
 
-         {/* <input type='search' onChange={handleChange} value={name} className={style.input}/>
-         <button onClick={()=>onSearch(name)} className={style.button}>Buscar</button> */}
-
       </div>
     )
 };
