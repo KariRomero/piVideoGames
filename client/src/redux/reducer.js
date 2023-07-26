@@ -1,9 +1,10 @@
-import { GET_VIDEOGAMES, GET_VIDEOGAME } from './action-types';
+import { GET_VIDEOGAMES, GET_VIDEOGAME, SEARCH_BY_NAME } from './action-types';
 
 
 const initialState = {
     videogames: [],
     videogame:[],
+    videogameSearch:[],
 }
 
 const reducer = (state = initialState,action) => {
@@ -17,7 +18,12 @@ const reducer = (state = initialState,action) => {
             return{
                 ...state,
                 videogame: action.payload
-            };            
+            };
+        case SEARCH_BY_NAME:
+            return{
+                ...state,
+                videogameSearch: action.payload
+            }
         default:
             return{...state};
     }
