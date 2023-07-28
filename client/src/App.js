@@ -5,6 +5,8 @@ import Nav from './components/Nav/Nav';
 import Home from './views/Home/Home';
 import Detail from './views/Detail/Detail';
 import Form from './views/Form/Form';
+// import SearchByName from './components/SearchByName/SearchByName';
+
 
 
 
@@ -28,6 +30,7 @@ function App() {
           <Route path='/home' element ={<Home/>}/>    
           <Route path='/detail/:id' element={<Detail/>}/>    
           <Route path='/form' element={<Form/>}/>
+          {/* <Route path={'/videogames'} element={<SearchByName/>}/> */}
 
         </Routes>
 

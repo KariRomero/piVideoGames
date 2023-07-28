@@ -1,4 +1,4 @@
-import { GET_VIDEOGAMES, GET_VIDEOGAME, SEARCH_BY_NAME } from './action-types';
+import { GET_VIDEOGAMES, GET_VIDEOGAME, SEARCH_BY_NAME, CLEAR_SEARCH_RESULTS } from './action-types';
 
 
 const initialState = {
@@ -23,7 +23,7 @@ const reducer = (state = initialState,action) => {
             return{
                 ...state,
                 videogameSearch: action.payload
-            }
+            };
         default:
             return{...state};
     }
