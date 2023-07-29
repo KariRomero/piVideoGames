@@ -6,9 +6,11 @@ const { Genres } = require('../db')
 const createGenres = async () => {
     const apiGenres = (await axios.get(`https://api.rawg.io/api/genres?key=${API_KEY}`)).data.results;
     const genres = apiGenres.map((genre) => genre.name);
-    const newGenre = await Genres.bulkCreate(genres.map((name)=>({name})));    
+    const newGenres = await Genres.bulkCreate(genres.map((name)=>({name})));   
+    return newGenres; 
 }
 
 module.exports = { 
     createGenres 
 };
+

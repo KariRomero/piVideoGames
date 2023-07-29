@@ -2,7 +2,8 @@ const axios = require('axios');
 require("dotenv").config();
 const { Op } = require('sequelize');
 const {API_KEY} = process.env;
-const { Videogames, Genres } = require('../db')
+const { Videogames, Genres } = require('../db');
+
 
 //////////////////////////////////
 const cleanArray = (arr) => {
@@ -23,31 +24,63 @@ const cleanArray = (arr) => {
         }
     })
 };
+
+const apiVideogames = async () => {
+  let url = `https://api.rawg.io/api/games?key=${API_KEY}`;
+  let videogames = [];
+  try {
+    for (i=0; i<5; i++){ //con un for recorro mi API, ya que es un arreglo, 5 veces
+      const response = await axios.get(url); //realizo la peticion
+      //en mi .data podemos encontrar dos propiedades, results que es es aquello que voy a mapear
+      response.data.results.map(v=>{ //a la respuesta/resultado lo mapeo
+        videogames.push({  //y pusheo en mi array vacio todo aquello que mapee
+          id: v.id,
+          name: v.name,
+          image: v.background_image,
+          rating: v.rating,
+          platforms: v.platforms?.map(el => el.platform.name),
+          genres: v.genres?.map(el => el.name)          
+        });
+      });
+      //y next que es donde voy a entrar para pasar a la siguente pagina.
+      url
+       = response.data.next;
+    } return videogames;    
+  } catch (error) {
+    console.log(error);    
+  }
+};
+
+const dbVideogames = async () => {
+  try {
+    return await Videogames.findAll({ //SELECT * FROM Videogame 
+      include: [{
+        model: Genres, 
+        atributes: ['name'], 
+        throught: { 
+            attributes: [] 
+        }
+    }]
+    })    
+  } catch (error) {
+    console.log(error);    
+  }
+};
+
+
+
+
 //////////////////////////////////
 
 
 const getAllVideogames = async() => {
-    const dbVideogames = await Videogames.findAll();
-
-    const apiVideogames = (await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}`)).data.results;
-
-    const apiVideogamesClean = cleanArray(apiVideogames);
-
-    return [...dbVideogames, ...apiVideogamesClean];
+  //para unir mis dos solicitudes, guardo en una variable la ejecucion de mis funciones
+  const videogamesDb = await dbVideogames();
+  const videogamesApi = await apiVideogames();
+  //ahora uno mis dos constantes contenedoras de funciones
+  const allVideogames = videogamesDb.concat(videogamesApi);
+  return allVideogames;
 };
-
-
-// Por nombre: "https://api.rawg.io/api/games?search={game}"
-// const searchByName = async (name) => {
-//     const dbVideogames = await Videogames.findAll({ where: { name: name } });
-    
-//     const apiVideogames = (await axios.get(`https://api.rawg.io/api/games?search=${name}?key=${API_KEY}`)).data.results;
-
-//     const apiVideogamesClean = cleanArray(apiVideogames);
-
-//     return [...dbVideogames, ...apiVideogamesClean];
-
-// }; 
 
 const searchByName=async (name) => {
     const dbVideogames = await Videogames.findAll({
@@ -73,7 +106,6 @@ const searchByName=async (name) => {
     return result.slice(0, 15);
   };
 
-
 const getVideogameById = async (id,source) => {
     const videoGame = 
     source === 'Api' 
@@ -93,9 +125,8 @@ const getVideogameById = async (id,source) => {
     return videoGame;
 };
 
-const createVideogame = async (name, description, platforms, background_image, released, rating, genres) => {
-  const videogameCreate = await Videogames.findOrCreate({
-    where:
+const createVideogame = async ({name, description, platforms, background_image, released, rating, genres}) => {
+  const videogameCreate = await Videogames.create({
     name,
     description,
     released,
@@ -103,12 +134,35 @@ const createVideogame = async (name, description, platforms, background_image, r
     platforms,
     background_image,
   })    
-  return videogameCreate[0].setGenres(genres)
+  videogameCreate.setGenres(genres)
 };
+
+const getApiVideogames = async() => {
+  const response = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}`);
+  const apiVideogames = response.data.results;
+  const apiVideogamesClean = cleanArray(apiVideogames);
+
+  return apiVideogamesClean;
+};
+
+const getPlatforms = async () => {
+  const allVideogames = await getApiVideogames();
+  const allPlatforms=[];
+  allVideogames.map((vg) => vg.platforms.map(p=>{
+    if(!allPlatforms.includes(p)) {
+      allPlatforms.push(p)
+    };
+  }));
+
+  return allPlatforms;   
+   
+}
 
 module.exports={
     getVideogameById,
     searchByName,
     getAllVideogames,
-    createVideogame
+    createVideogame,
+    getPlatforms,
+            
 };
