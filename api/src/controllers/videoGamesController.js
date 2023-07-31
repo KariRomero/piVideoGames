@@ -8,19 +8,19 @@ const { Videogames, Genres } = require('../db');
 //////////////////////////////////
 const cleanArray = (arr) => {
     return arr.map((elem) => {
-        const platforms = [elem.platforms, elem.parent_platforms]
-             .flatMap(platform => platform.map(p=>p.platform.name));
+        // const platforms = [elem.platforms, elem.parent_platforms]
+        //      .flatMap(platform => platform.map(p=>p.platform.name));
 
-        const genres = elem.genres.map(g=>g.name);
+        // const genres = elem.genres.map(g=>g.name);
         return{
             id: elem.id,
             name: elem.name,
             description: elem.description,
-            platforms: platforms,
+            platforms: elem.platforms?.map(el => el.platform.name),
             background_image: elem.background_image,
             released: elem.released,
             rating: elem.rating,
-            genres: genres
+            genres: elem.genres?.map(el => el.name)
         }
     })
 };
@@ -125,44 +125,29 @@ const getVideogameById = async (id,source) => {
     return videoGame;
 };
 
-const createVideogame = async ({name, description, platforms, background_image, released, rating, genres}) => {
-  const videogameCreate = await Videogames.create({
+const createVideogame = async ({ name, description, platforms, background_image, released, rating, genres }) => {
+  let newVideogame = await Videogames.create({
     name,
     description,
-    released,
-    rating,
     platforms,
     background_image,
-  })    
-  videogameCreate.setGenres(genres)
+    released,
+    rating,
+  });
+
+  const relacion = await Genres.findAll({
+    where: {
+      name: genres,
+    },
+  });
+  await newVideogame.addGenres(relacion);
+  return newVideogame;
 };
 
-const getApiVideogames = async() => {
-  const response = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}`);
-  const apiVideogames = response.data.results;
-  const apiVideogamesClean = cleanArray(apiVideogames);
-
-  return apiVideogamesClean;
-};
-
-const getPlatforms = async () => {
-  const allVideogames = await getApiVideogames();
-  const allPlatforms=[];
-  allVideogames.map((vg) => vg.platforms.map(p=>{
-    if(!allPlatforms.includes(p)) {
-      allPlatforms.push(p)
-    };
-  }));
-
-  return allPlatforms;   
-   
-}
 
 module.exports={
     getVideogameById,
     searchByName,
     getAllVideogames,
-    createVideogame,
-    getPlatforms,
-            
+    createVideogame,                
 };
