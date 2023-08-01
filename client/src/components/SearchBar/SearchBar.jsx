@@ -1,14 +1,13 @@
 import style from './SearchBar.module.css';
-import { searchByName, getVideogames } from '../../redux/actions';
+import { searchByName } from '../../redux/actions';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-// import { Link } from 'react-router-dom';
-
 
 
 const SearchBar = () => {
+
+    const [name, setName] = useState('');
     
-    const [name, setName] = useState('')
     const dispatch = useDispatch();
 
     const handleInputChange = (event) => {
@@ -17,31 +16,18 @@ const SearchBar = () => {
 
     const handleOnClick = () => {
         dispatch(searchByName(name));
+        setName('');
         
     };
 
-    // const handleReset = () =>{
-    //     dispatch(getVideogames())
-    //     setName('')
-    // };
-
-  
+      
    
     return(
         <div className={style.container}>
 
-            <input value={name} onChange={handleInputChange} type='search' className={style.input} placeholder='Search...'/>
-
-            {/* <Link to={`/videogames?name=${name}`}> */}
+            <input value={name} onChange={handleInputChange} type='search' className={style.input} placeholder='Search...'/>            
             <button onClick={handleOnClick} className={style.button}>Search</button>
-            {/* </Link> */}
-
-            {/* <button className={style.button} onClick={handleReset}>Reset</button> */}
-
-
-            
-
-
+            {/* {error && <p className={style.error}>{error}</p>} */}
 
       </div>
 

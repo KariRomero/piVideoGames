@@ -1,7 +1,7 @@
 import style from './Nav.module.css';
 import SearchBar from '../SearchBar/SearchBar';
 import { Link } from 'react-router-dom';
-import { getVideogames } from '../../redux/actions';
+import { getVideogames, clearSearch } from '../../redux/actions';
 import { useDispatch } from 'react-redux';
 
 
@@ -10,7 +10,8 @@ const Nav = () => {
     const dispatch = useDispatch();
 
      const handleReset = () =>{
-         dispatch(getVideogames())
+         dispatch(getVideogames());
+        dispatch(clearSearch());
     };
 
     
@@ -25,7 +26,7 @@ const Nav = () => {
                 <button className={style.button}>Home</button>
             </Link>     
 
-            <button className={style.button} onClick={(e) => handleReset(e)}>Reset</button>                 
+            <button className={style.button} onClick={handleReset}>Reset</button>                 
 
             <SearchBar/>
         </div>

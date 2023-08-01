@@ -22,7 +22,7 @@ function App() {
   return (
 
     <div className="App">
-      {showNav && <Nav/>}
+      {/* {showNav && <Nav/>} */}
 
         <Routes>
 

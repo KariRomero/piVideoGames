@@ -1,9 +1,0 @@
-.container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 80%;
-    background-color: rgba(114, 21, 21, 0.808);
-    margin-top: 2%;   
-    
-  }
