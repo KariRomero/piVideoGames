@@ -2,7 +2,6 @@ import Card from '../Card/Card';
 import style from './Cards.module.css';
 import imgNotFound from './Data/imgNotFound.jpg';
 import { useDispatch } from "react-redux";
-// import { useState } from 'react';
 import { getVideogames } from '../../redux/actions';
 import { useEffect } from 'react';
 
@@ -11,8 +10,9 @@ const Cards = ({currentGames}) => {
     const dispatch = useDispatch();
     
     useEffect(() => {
-      dispatch(getVideogames()) //me traigo la action creators q me trae todos mis videojuegos
-    },[]);
+        dispatch(getVideogames())
+      
+      },[]);
 
 
     return(

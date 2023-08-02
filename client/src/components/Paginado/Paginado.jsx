@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const Paginado = ({gamesPerPage, allGames, paginado}) => {
     
-    const {page:pagina} = useSelector((state)=>state)
+    const currentPage = useSelector((state)=>state.page)
     const dispatch = useDispatch();
    
 
@@ -26,11 +26,11 @@ const Paginado = ({gamesPerPage, allGames, paginado}) => {
         <nav>
             <div className={style.paginacion}>
 
-                <button onClick={()=>handleChangepage(pagina-1)}
-                disabled={pagina === 0}
+                {/* <button onClick={()=>handleChangepage(currentPage-1)}
+                disabled={currentPage === 1}
                 key={'prev'}>
                     {'PREV'}
-                </button>                
+                </button>                 */}
              
                 {pageNumber && pageNumber.map(number => ( //si en pageNumber hay algo mapealo
                     <span key={number}>
@@ -38,11 +38,15 @@ const Paginado = ({gamesPerPage, allGames, paginado}) => {
                     </span>
                 ))}
 
-                <button onClick={()=>handleChangepage(pagina+1)}
+                {/* <button onClick={()=>handleChangepage(pagina+1)}
                 disabled={pagina===cantPaginas}
                 key={'next'}>
                     {'NEXT'}
-                </button> 
+                </button>  */}
+
+                
+
+                {/* <button onClick={()=>handleChangepage(currentPage+1)} disabled={currentPage === cantPaginas} key={'next'}>{'NEXT'}</button> */}
 
             </div>
         </nav>

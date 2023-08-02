@@ -6,13 +6,13 @@ import style from './Filtrados.module.css';
 
 const Filtrados = ({handleOrigin, handleGenres, handleOrder}) => {
 
-    const dispatch = useDispatch() //el useDispatch devuelve el metodo dispatch que permite dispatchar acciones
-    const generos = useSelector(state => state.allGenres)// el useSelector lee un valor del estado del store(reducer) y se suscribe a las actualizaciones del mismo.
-    //console.log(generos)
+    const dispatch = useDispatch() 
+    const generos = useSelector(state => state.allGenres)
+   
 
     useEffect(() => { //
         dispatch(getGenres())
-        //dispatch(getAllVideogames())
+        
     }, [])
 
 
@@ -40,7 +40,7 @@ const Filtrados = ({handleOrigin, handleGenres, handleOrder}) => {
                         <option value="api">API</option>
                         <option value="created">Created</option>
                     </select>
-                    {/* <button className={s.btn}onClick={e => handleRefresh(e)}>Refresh</button> */}
+                    
             </div>
     )
 }

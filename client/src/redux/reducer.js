@@ -8,7 +8,9 @@ import {
     FILTER_BY_ORDER, 
     FILTER_BY_ORIGIN,
     CREATE_VIDEOGAME,
-    CHANGE_PAGE
+    CHANGE_PAGE,
+    DELETE_VIDEOGAME,
+    // DELETE_VIDEOGAME
 } from './action-types';
 
 
@@ -29,7 +31,8 @@ const reducer = (state = initialState,action) => {
             return{
                 ...state, 
                 videogames: action.payload,
-                copia: action.payload
+                copia: action.payload,
+                // videogameSearch: action.payload
             };
         case GET_VIDEOGAME:
             return{
@@ -143,7 +146,19 @@ const reducer = (state = initialState,action) => {
             return{
                 ...state,
                 page:action.payload
-            }
+            };
+        // case DELETE_VIDEOGAME:
+        //     const filtered = state.copia.filter(
+        //         (game) => game.id !== action.payload
+        //     );
+    
+        //     return {
+        //         ...state,
+        //         copia: filtered.length > 0 ? filtered : "No games",
+        //         videogames: state.videogames.filter(
+        //             (game) => game.id !== action.payload
+        //         ),
+        //     };
         default:
             return{...state};
     }

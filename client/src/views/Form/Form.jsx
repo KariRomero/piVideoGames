@@ -18,6 +18,7 @@ const Form = () => {
 
     useEffect(()=>{
         dispatch(getGenres())
+        console.log(img);
     },[])
 
     const randomPlatforms = [
@@ -41,7 +42,7 @@ const Form = () => {
         released:'',        
         rating:'',
         genres:[],
-        image: img
+        image:''
     })
 
     const [errors, setErrors] = useState({
@@ -60,8 +61,11 @@ const Form = () => {
         if (exist){
             alert('That videogame already exists!')
         } else {
+            if(!form.image) form.image = img;
+            console.log(form);
+            
             dispatch(createVideogame(form));
-
+            
             setForm({
                 name:'',
                 description:'',
@@ -124,15 +128,16 @@ const Form = () => {
 
     
 
-    const emptyErrors = Object.keys(errors).length===0;
+    const emptyErrors = Object.keys(errors).length===0; //tomo las propoiedades de errors y las introduzco en unn array para aplicar.length
 
     return(
         <div className={style.background}>
         <form onSubmit={(e) => handleSubmit(e)} className={style.form}>
 
             <div className={style.imgcontainer}>
-                
-                <img src={form.image} alt={form.name} className={style.image}/>
+                <label>Image URL:</label>
+                <input type='text' value={form.image} onChange={(e)=>handleChange(e)} name='image'/>                
+                {/* <img src={form.image} alt={form.name} className={style.image}/> */}
             </div>
 
         <div className={style.fullcont}>
@@ -173,10 +178,11 @@ const Form = () => {
                 {form.genres.map((g)=>(
                     <div className={style.boxopcion}>
                         <div className={style.opciontitle}>{g}</div>
-                        <button className={style.button} onClick={() => handleDeleteG(g)}  value={g}><span className={style.x}>X</span></button>
+                        <button className={style.button} onClick={() => handleDeleteG(g)}  value={g}><span className={style.x}>X</span></button>                                               
                     </div>
                     ))                    
                 }
+                {errors.genres && <p className={style.errors}>{errors.genres}</p>} 
             </div>
 
             <div className={style.cont}>

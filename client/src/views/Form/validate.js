@@ -12,7 +12,7 @@ const validate = (form) => {
         errors.description = 'Complete description'
     }
     // if(!form.platforms){
-    //     errors.platforms = 'Complete platforms'
+    //     errors.platforms = 'Choose almost one platform'
     // }
     // if(!form.image){
     //     errors.image = 'Complete image'
@@ -24,7 +24,7 @@ const validate = (form) => {
         errors.rating = 'Complete rating'
     }
     // if(!form.genre){
-    //     errors.genre = 'Complete genre'
+    //     errors.genre = 'Choose almost one genre'
     // }
     if(!form.description){
         errors.description = 'Complete description'
