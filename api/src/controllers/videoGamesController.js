@@ -7,17 +7,13 @@ const { Videogames, Genres } = require('../db');
 
 //////////////////////////////////
 const cleanArray = (arr) => {
-    return arr.map((elem) => {
-        // const platforms = [elem.platforms, elem.parent_platforms]
-        //      .flatMap(platform => platform.map(p=>p.platform.name));
-
-        // const genres = elem.genres.map(g=>g.name);
+    return arr.map((elem) => {        
         return{
             id: elem.id,
             name: elem.name,
             description: elem.description,
             platforms: elem.platforms?.map(el => el.platform.name),
-            background_image: elem.background_image,
+            image: elem.background_image,
             released: elem.released,
             rating: elem.rating,
             genres: elem.genres?.map(el => el.name)
@@ -112,13 +108,13 @@ const getVideogameById = async (id,source) => {
     ?(await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)).data 
     :await Videogames.findByPk(id);
        if(source==='Api'){
-        const { id, name, description, released, platforms, parent_platforms, background_image,rating,genres} = videoGame;
+        const { id, name, description, released, platforms, parent_platforms, image,rating,genres} = videoGame;
         const platformVideogame = [platforms, parent_platforms]
             .flatMap(platform => platform.map(p=>p.platform.name));
 
         const genresVideogame = genres.map(g=>g.name);
             
-        return {id, name, description, released, platformVideogame,background_image,rating, genresVideogame}
+        return {id, name, description, released, platformVideogame, image, rating, genresVideogame}
 
        }
 
