@@ -2,35 +2,35 @@ const validate = (form) => {
     const errors = {};
     
     if(!form.name){
-        errors.name = 'Debe completar name'
+        errors.name = 'Complete name'
     }else if(!/^[a-zA-Z0-9-() .]+$/.test(form.name)){
-        errors.name = 'Solo se aceptan letras, numeros, guiones medios y parentesis'
+        errors.name = 'Only letters, numbers, - and ()'
     }else if(form.name.length<5){
-        errors.name = 'Debe tener mas de 5 caracteres'
+        errors.name = 'Must have more than 5 characters'
     }
     if(!form.description){
-        errors.description = 'Debe completar description'
+        errors.description = 'Complete description'
     }
     // if(!form.platforms){
-    //     errors.platforms = 'Debe completar platforms'
+    //     errors.platforms = 'Complete platforms'
     // }
     // if(!form.image){
-    //     errors.image = 'Debe completar image'
+    //     errors.image = 'Complete image'
     // }
     if(!form.released){
-        errors.released = 'Debe completar released'
+        errors.released = 'Complete released'
     }
     if(!form.rating){
-        errors.rating = 'Debe completar rating'
+        errors.rating = 'Complete rating'
     }
     // if(!form.genre){
-    //     errors.genre = 'Debe completar genre'
+    //     errors.genre = 'Complete genre'
     // }
-    if(form.description<1000){
-        errors.description = 'Puede contener hasta 1000 caracteres'
+    if(!form.description){
+        errors.description = 'Complete description'
     }
     if (isNaN(form.rating) || form.rating < 0 || form.rating > 5) {
-        errors.rating = 'La calificación debe estar en el rango de 0 a 5'
+        errors.rating = 'The rating must be in the range of 0 to 5'
     }    
     return errors;
 };

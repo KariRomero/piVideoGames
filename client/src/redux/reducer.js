@@ -6,7 +6,9 @@ import {
     GET_GENRES,
     FILTER_BY_GENRES,
     FILTER_BY_ORDER, 
-    FILTER_BY_ORIGIN
+    FILTER_BY_ORIGIN,
+    CREATE_VIDEOGAME,
+    CHANGE_PAGE
 } from './action-types';
 
 
@@ -15,7 +17,9 @@ const initialState = {
     videogame:[],
     videogameSearch:[],
     allGenres: [],
-    copia:[]
+    copia:[],
+    page:0
+    
     
 }
 
@@ -129,6 +133,16 @@ const reducer = (state = initialState,action) => {
             return {
                 ...state,
                 videogames: aux,
+            };
+        case CREATE_VIDEOGAME:
+            return{
+                ...state,
+                videogames: action.payload,
+            };
+        case CHANGE_PAGE:
+            return{
+                ...state,
+                page:action.payload
             }
         default:
             return{...state};

@@ -1,0 +1,18 @@
+.box {
+    background-color: rgba(127, 255, 212, 0);
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+    
+    top: 50%;
+    left: 50%;
+    border-radius: 8px;
+  }
+
+  .box select {
+    border: 1px;
+    border-color: white;
+    border-radius: 5px;
+    border-style: solid;
+  }
+ 

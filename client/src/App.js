@@ -22,7 +22,7 @@ function App() {
   return (
 
     <div className="App">
-      {/* {showNav && <Nav/>} */}
+      {showNav && <Nav/>}
 
         <Routes>
 
@@ -30,7 +30,7 @@ function App() {
           <Route path='/home' element ={<Home/>}/>    
           <Route path='/detail/:id' element={<Detail/>}/>    
           <Route path='/form' element={<Form/>}/>
-          {/* <Route path={'/videogames'} element={<SearchByName/>}/> */}
+         
 
         </Routes>
 

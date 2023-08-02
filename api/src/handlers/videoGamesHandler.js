@@ -35,13 +35,13 @@ const postVideoGamesHandler = async (req,res) => {
     }
 };
 
-const getPlatformsHandler = () => {};
+
 
 
 module.exports={
     getVideoGamesHandler,
     getDetailHandler,
     postVideoGamesHandler,
-    getPlatformsHandler    
+        
 }
 

@@ -19,7 +19,7 @@ const Filtrados = ({handleOrigin, handleGenres, handleOrder}) => {
     return (
             <div className={style.box}>
                     <select onChange={e => handleOrder(e)}>
-                        <option value="" >Ordenar por...</option>
+                        <option value="" >Order by...</option>
                         <option value="A-Z" >A-Z</option>
                         <option value="Z-A" >Z-A</option>
                         <option value="RatingAsc">Rating Asc</option>
@@ -27,7 +27,7 @@ const Filtrados = ({handleOrigin, handleGenres, handleOrder}) => {
                     </select>
 
                     <select id="genre" onChange={e => handleGenres(e)}>
-                        <option value=''>Generos</option>
+                        <option value=''>Genre</option>
                         {generos && generos.map(g => {
                             return (
                                 <option key={g.id} value={g.name}>{g.name}</option>
@@ -36,7 +36,7 @@ const Filtrados = ({handleOrigin, handleGenres, handleOrder}) => {
                     </select>
 
                     <select onChange={e => handleOrigin(e)}>
-                        <option value=''>Filtrar por Origen</option>
+                        <option value=''>Filter by origin</option>
                         <option value="api">API</option>
                         <option value="created">Created</option>
                     </select>

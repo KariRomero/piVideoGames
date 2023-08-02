@@ -1,16 +1,20 @@
 import style from './Form.module.css';
 import { useState } from "react";
 import { useSelector } from 'react-redux';
-import axios from 'axios';
 import validate from './validate';
-import { getGenres } from '../../redux/actions';
+import { getGenres, createVideogame } from '../../redux/actions';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+import img  from './Data/default.jpg'
 
 const Form = () => {
 
     const allGenres = useSelector((state) => state.allGenres);    
+    const allVideogames = useSelector((state) => state.videogames)
     const dispatch = useDispatch();
+
+    const navigate = useNavigate()
 
     useEffect(()=>{
         dispatch(getGenres())
@@ -18,39 +22,60 @@ const Form = () => {
 
     const randomPlatforms = [
             "PlayStation 5",
-			"Xbox Series S/X",
 			"PlayStation 4",
 			"PC",
 			"PlayStation 3",
 			"Xbox 360",
 			"Xbox One",
-			"PC",
-			"PlayStation",
 			"Xbox",
-            "Nintendo"
+            "Nintendo",
+            "iOS",
+            "Android",
+            "SEGA"
     ];
 
     const [form, setForm] = useState({
         name:'',
         description:'',
-        platforms:'',
-        image:'',
-        released:'',
+        platforms:[],
+        released:'',        
         rating:'',
-        genre:'',
+        genres:[],
+        image: img
     })
 
     const [errors, setErrors] = useState({
         name:'',
         description:'',
-        platforms:'',
-        image:'',
-        released:'',
+        platforms:[],
+        released:'',        
         rating:'',
-        genre:'',        
+        genres:[],    
+        image:''    
     })
 
-    const changeHandler = (event) => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const exist = allVideogames.find(n=>n.name === form.name)
+        if (exist){
+            alert('That videogame already exists!')
+        } else {
+            dispatch(createVideogame(form));
+
+            setForm({
+                name:'',
+                description:'',
+                platforms:[],
+                released:'',
+                rating: 0,
+                genres:[],                
+                });
+                alert('Videogame created!')
+        }
+        navigate('/home')
+    };
+
+    const handleChange = (event) => {
         const property = event.target.name;
         const value = event.target.value;
 
@@ -62,84 +87,128 @@ const Form = () => {
             ...form,
             [property]: value,
         }))
-    }
+        console.log(form.released);
+    };
 
-    
-    const submitHandler = (event) => {
-        event.preventDefault()
-        axios.post('http://localhost:3001/videogames', form)
-        .then(res=>alert(res))
-        .catch(err=>alert(err))                      // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<     VER
-    }
+    const handleGenres = (e) => {
+        if(!form.genres.includes(e.target.value)){
+            setForm({
+                ...form,
+                genres:[...form.genres, e.target.value]
+            })
+        }
+    };
 
-    const handleChange = (event) =>{
-        const value = Array.from(
-            event.target.selectedOptions,
-            (option) => option.value
-        );
+    const handlePlatforms = (e) => {
+        if(!form.platforms.includes(e.target.value)){
+            setForm({
+                ...form,
+                platforms:[...form.platforms, e.target.value]
+            })
+        }
+    };
+
+    const handleDeleteG = (e) => {
         setForm({
             ...form,
-            [event.target.name]: value,
-        });
+            genres: form.genres.filter((gen) => gen !== e)
+        })
     };
+
+    const handleDeleteP = (e) => {
+        setForm({
+            ...form,
+            platforms: form.platforms.includes((plat)=> plat !== e)
+        })
+    };
+
+    
 
     const emptyErrors = Object.keys(errors).length===0;
 
     return(
         <div className={style.background}>
-        <form onSubmit={submitHandler} className={style.form}>
+        <form onSubmit={(e) => handleSubmit(e)} className={style.form}>
+
+            <div className={style.imgcontainer}>
+                
+                <img src={form.image} alt={form.name} className={style.image}/>
+            </div>
+
+        <div className={style.fullcont}>
+
+            <div className={style.title}>
+                <h2>CREATE YOUR VIDEOGAME</h2>
+            </div>
+            
             <div className={style.cont}>
                 <label className={style.label}>Name:</label>
-                <input placeholder='write videogame name...' type="text" value={form.name} onChange={changeHandler} name='name' className={style.input}/>
+                <input placeholder='write videogame name...' type="text" value={form.name} onChange={(e)=>handleChange(e)} name='name' className={style.input}/>
                 {errors.name && <p className={style.errors}>{errors.name}</p>}
             </div>
 
-            {/* <div className={style.cont}>
-                <label className={style.label}>Image:</label>
-                <input type="text" value={form.image} onChange={changeHandler} name='image' className={style.input}/>
-                {errors.image && <p className={style.errors}>{errors.image}</p>}
-            </div> */}
-
             <div className={style.cont}>
-                <label className={style.label}>Description:</label>
-                <input placeholder='write videogame description...' type="text" value={form.description} onChange={changeHandler} name='description' className={style.input}/>
-                {errors.description && <p className={style.errors}>{errors.description}</p>}
-            </div>
-
-            <div className={style.cont}>
-                <label className={style.label}>Realesed:</label>
-                <input type="date" value={form.released} onChange={changeHandler} name='released' className={style.input}/>
+                <label className={style.label}>Released:</label>
+                <input type="date" value={form.released} onChange={(e)=>handleChange(e)} name='released' className={style.input}/>
                 {errors.released && <p className={style.errors}>{errors.released}</p>}
             </div>
-
+            
             <div className={style.cont}>
                 <label className={style.label}>Rating:</label>
-                <input placeholder='write videogame rating...' type="text" value={form.rating} onChange={changeHandler} name='rating' className={style.input}/>
+                <input placeholder='write videogame rating...' type="number" step=".1" value={form.rating} onChange={(e)=>handleChange(e)} name='rating' className={style.input}/>
                 {errors.rating && <p className={style.errors}>{errors.rating}</p>}
             </div>
 
             <div className={style.cont}>
-                <label className={style.label}>Platforms:</label>
-
-                <select className={style.select} value={form.platforms} name='platforms' multiple size='5' onChange={handleChange}>
-                    {randomPlatforms && randomPlatforms.map((p) => (
-                        <option key={p} value={p}>{p}</option>
-                    ))}
-                </select> 
+                <select className={style.select} id='genres' defaultValue='' onChange={(e)=>handleGenres(e)}>
+                    <option className={style.option} value='' disabled hidden>Choose your genres...</option>
+                    {allGenres.map((g)=>{
+                        return(
+                            <option className={style.option} key={g.id} value={g.name}>{g.name}</option>
+                        )
+                    })                        
+                    }
+                </select>
+                <label className={style.label}>Genres:</label>
+                {form.genres.map((g)=>(
+                    <div className={style.boxopcion}>
+                        <div className={style.opciontitle}>{g}</div>
+                        <button className={style.button} onClick={() => handleDeleteG(g)}  value={g}><span className={style.x}>X</span></button>
+                    </div>
+                    ))                    
+                }
             </div>
 
             <div className={style.cont}>
-                <label className={style.label}>Generes:</label>
-
-                <select className={style.select} value={form.genre} name='genre' multiple size='5' onChange={handleChange}>
-                    {allGenres && allGenres.map((genre) => (
-                        <option key={genre.name} value={genre.name}>{genre.name}</option>
-                    ))}
+                <select className={style.select} id='platforms' defaultValue='' onChange={(e)=>handlePlatforms(e)}>
+                    <option className={style.option} value='' disabled hidden>Choose your platforms...</option>
+                    {randomPlatforms.map((p)=>{
+                        return(
+                            <option className={style.option} value={p} >{p}</option>
+                        )
+                    })                        
+                    }
                 </select>
-               
+                <label className={style.label}>Platforms:</label>
+                {form.platforms.map((p)=> (
+                    <div className={style.boxopcion}>
+                        <div className={style.option}>{p}</div>
+                        <button className={style.button} onClick={() => handleDeleteP(p)} key={p} value={p}><span className={style.x}>X</span></button>
+                    </div>
+                    ))                    
+                }
+            </div>
+            
+            <div className={style.cont}>
+                <label className={style.label}>Description:</label>
+                <textarea placeholder='write videogame description...' type="text" value={form.description} onChange={handleChange} name='description' className={style.input}/>
+                {errors.description && <p className={style.errors}>{errors.description}</p>}
             </div>
 
+            
+
             {emptyErrors && <button type="submit" className={style.button}>New Game</button>}
+        </div>
            
         </form>
         </div>

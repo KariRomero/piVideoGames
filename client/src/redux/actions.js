@@ -7,7 +7,9 @@ import {
     GET_GENRES, 
     FILTER_BY_GENRES,
     FILTER_BY_ORDER,
-    FILTER_BY_ORIGIN 
+    FILTER_BY_ORIGIN,
+    CREATE_VIDEOGAME,
+    CHANGE_PAGE
 } from './action-types';
 
 export const getVideogames= () => {
@@ -69,13 +71,26 @@ export const filterByOrigin = (payload) => {
     })
 };
 
+export const createVideogame = (videogame) => {
+    return async (dispatch)=>{
+        try {
+            console.log(videogame);
+            const { data } = await axios.post(`http://localhost:3001/videogames`, videogame);
+            return dispatch({
+                type: CREATE_VIDEOGAME,
+                payload: data
+            });            
+        } catch (error) {
+            console.log(error);            
+        }
+    }
+};
 
-// export const getPlatforms = () => {
-//     return async function (dispatch){}
-// };
-
-
-
-
+export const changePage = (page) => {
+    return({
+        type: CHANGE_PAGE,
+        payload:page
+    })
+};
 
 

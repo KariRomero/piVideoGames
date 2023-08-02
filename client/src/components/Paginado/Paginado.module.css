@@ -1,11 +1,11 @@
-.container {
+.paginacion {
     display: inline-block;
     padding: 0;
     margin: 0;
   }
 
-  .button{
-    background-color: rgba(0, 0, 0, 0);
+.button {
+  background-color: rgba(0, 0, 0, 0);
     cursor: pointer;
     border: 1px;
     border-color: white;
@@ -19,3 +19,19 @@
     margin-right: 5px;
     margin-left: 5px;
 }
+
+.button:focus {
+  background-color: rgba(178, 89, 236, 0.616);
+  color: rgb(253, 253, 253);
+}
+
+.button:first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+
+.button:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
