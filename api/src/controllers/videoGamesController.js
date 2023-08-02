@@ -125,12 +125,12 @@ const getVideogameById = async (id,source) => {
     return videoGame;
 };
 
-const createVideogame = async ({ name, description, platforms, background_image, released, rating, genres }) => {
+const createVideogame = async ({ name, description, platforms, image, released, rating, genres }) => {
   let newVideogame = await Videogames.create({
     name,
     description,
     platforms,
-    background_image,
+    image,
     released,
     rating,
   });
@@ -140,6 +140,7 @@ const createVideogame = async ({ name, description, platforms, background_image,
       name: genres,
     },
   });
+  console.log(relacion);
   await newVideogame.addGenres(relacion);
   return newVideogame;
 };

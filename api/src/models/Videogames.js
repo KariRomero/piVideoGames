@@ -19,19 +19,19 @@ module.exports = (sequelize) => {
       allowNull:false
     },
     platforms:{
-      type:  DataTypes.STRING,
+      type:  DataTypes.ARRAY(DataTypes.STRING),
       allowNull:false
     },
-    background_image:{
+    image:{
       type:  DataTypes.STRING,
-      
+      allowNull: true      
     },
     released:{
       type:  DataTypes.STRING,
       allowNull:false
     },
     rating:{
-      type: DataTypes.FLOAT,
+      type: DataTypes.DECIMAL,
       allowNull:false
     }
     
