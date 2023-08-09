@@ -96,9 +96,7 @@ const searchByName=async (name) => {
     
     const result = [...dbVideogames, ...filteredApi];
 
-    if (result.length === 0) {
-      return { message: `Ningún videojuego coincide con: '${name}'` };
-    }
+    
     return result.slice(0, 15);
   };
 

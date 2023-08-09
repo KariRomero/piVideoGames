@@ -12,6 +12,7 @@ const getVideoGamesHandler = async (req,res)=>{
 
 const getDetailHandler = async (req,res) => {
     const { id } = req.params;
+
     const source = isNaN(id) ? 'BDD' : 'Api';
 
     try{
@@ -44,4 +45,20 @@ module.exports={
     postVideoGamesHandler,
         
 }
+
+
+
+
+
+
+
+                                                  const dev = ['Sleep', 'Code', 'Repeat']
+
+
+
+
+
+
+
+
 
