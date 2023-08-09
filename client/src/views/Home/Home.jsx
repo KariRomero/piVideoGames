@@ -2,6 +2,7 @@ import style from './Home.module.css';
 import Cards from '../../components/Cards/Cards';
 import Paginado from '../../components/Paginado/Paginado';
 import Filtrados from '../../components/Filtrados/Filtrados';
+import About from '../../components/About/About';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getVideogames, filterByOrigin, filterByGenres, filterByOrder } from '../../redux/actions';
@@ -80,6 +81,10 @@ function handleOrder(e) {
 
       <div className={style.containerpag}>
         <Paginado gamesPerPage={gamesPerPage} allGames={displayVideogames.length} paginado={paginado} />
+      </div>
+
+      <div>
+        <About/>
       </div>
 
     </div>
