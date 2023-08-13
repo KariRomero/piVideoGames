@@ -24,7 +24,7 @@ const Detail = () => {
             <div className={style.container}>
 
                     <div className={style.imgcontainer}>
-                        <img src={videogame.background_image} alt={videogame.name} className={style.image}/>                        
+                        <img src={videogame.background_image ? videogame.background_image : videogame.image} alt={videogame.name} className={style.image}/>                        
                     </div>
             
                     <div className={style.content}>                        
