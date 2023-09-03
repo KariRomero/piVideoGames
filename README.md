@@ -14,6 +14,8 @@ La idea de este proyecto es construir una aplicación web a partir de la API [**
 
 Para probar la SPA es necesario clonar el repositorio, luego instalar las correspondientes dependencias en el client y en la api, por ultimo levantar cada uno mediante el comando **npm start**.
 
+Comparto [**video**](https://vimeo.com/854233470?share=copy) para visualizar su funcionamiento
+
 
 
 
