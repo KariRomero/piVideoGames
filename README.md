@@ -13,10 +13,15 @@ La idea de este proyecto es construir una aplicación web a partir de la API [**
 -  Crear nuevos videojuegos.
 
 Para probar la SPA es necesario clonar el repositorio, luego instalar las correspondientes dependencias en el client y en la api, crear una base de datos 'reservas' generar un archivo .env dentro de la carpeta server con las siguientes variables de entorno:
+
 DB_USER=postgres
-DB_PASSWORD=<<PasswordDB>>
+
+DB_PASSWORD=PasswordDB
+
 DB_HOST=localhost
+
 DB_PORT=5432
+
 DATABASE=reservas
 
 por ultimo levantar front y back mediante el comando **npm start**.
