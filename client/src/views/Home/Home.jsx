@@ -66,6 +66,7 @@ function handleOrder(e) {
    <div className={style.background}>
    
       <div className={style.containerWrapper}>
+      
 
       {/* <div className={style.containerfilt}>
          <Filtrados handleOrigin={handleOrigin} handleGenres={handleGenres} handleOrder={handleOrder}/>
