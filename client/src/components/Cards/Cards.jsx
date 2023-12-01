@@ -1,6 +1,6 @@
 import Card from '../Card/Card';
 import style from './Cards.module.css';
-import imgNotFound from './Data/imgNotFound.jpg';
+//import imgNotFound from './Data/imgNotFound.jpg';
 import { useDispatch } from "react-redux";
 import { getVideogames } from '../../redux/actions';
 import { useEffect } from 'react';

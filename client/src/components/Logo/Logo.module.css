@@ -1,0 +1,10 @@
+.containerLogo {
+    background-color: rgba(153, 205, 50, 0);
+    width: 200px; /* Establece la anchura deseada para el contenedor */
+    height: 200; /* Establece la altura deseada para el contenedor */
+  }
+  
+  .logoImg {
+    width: 100%; /* La imagen ocupará el 100% del ancho del contenedor */
+    height: 100%; /* La imagen ocupará el 100% de la altura del contenedor */
+  }

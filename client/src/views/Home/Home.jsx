@@ -12,11 +12,9 @@ import { getVideogames, filterByOrigin, filterByGenres, filterByOrder } from '..
 const Home = () => {
   const videogames = useSelector((state) => state.videogames);
   const videogameSearch = useSelector((state) => state.videogameSearch);
-  console.log('todos', videogames);
-  console.log('buscados', videogameSearch);
   const displayVideogames = videogameSearch.length > 0 ? videogameSearch : videogames;
   // const displayVideogames = videogameSearch;
-if ( videogameSearch.message) alert(videogameSearch.message)
+
   const [currentPage, setCurrentPage] = useState(1) //lo seteo en 1 porque siempre arranco por la primer pagina
   const gamesPerPage = 15//cantidad de juegos que debe haber por pagina
   const indexOfLastGame = currentPage * gamesPerPage // 1 * 15 = 15
@@ -63,17 +61,15 @@ function handleOrder(e) {
       dispatch(filterByOrder(e.target.value))
       setCurrentPage(1)
   }
-}
-
-
-  
+}  
   return(
    <div className={style.background}>
+   
       <div className={style.containerWrapper}>
 
-      <div className={style.containerfilt}>
+      {/* <div className={style.containerfilt}>
          <Filtrados handleOrigin={handleOrigin} handleGenres={handleGenres} handleOrder={handleOrder}/>
-      </div>
+      </div> */}
 
       <div className={style.containercards}>
         <Cards currentGames={currentGames}/>        

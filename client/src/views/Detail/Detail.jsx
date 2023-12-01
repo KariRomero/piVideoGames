@@ -31,7 +31,7 @@ const Detail = () => {
                         <div className={style.name}>{videogame.name}</div> 
 
                         <div className={style.buttoncont}>
-                            <Link to='/home'>
+                            <Link to='/'>
                             <button className={style.button}>Back</button>
                             </Link>
                         </div>

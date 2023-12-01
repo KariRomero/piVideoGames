@@ -6,7 +6,7 @@ import { getGenres, createVideogame } from '../../redux/actions';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import img  from './Data/default.jpg'
+
 
 const Form = () => {
 
@@ -17,8 +17,7 @@ const Form = () => {
     const navigate = useNavigate()
 
     useEffect(()=>{
-        dispatch(getGenres())
-        console.log(img);
+        dispatch(getGenres())        
     },[])
 
     const randomPlatforms = [
@@ -61,9 +60,6 @@ const Form = () => {
         if (exist){
             alert('That videogame already exists!')
         } else {
-            if(!form.image) form.image = img;
-            console.log(form);
-            
             dispatch(createVideogame(form));
             
             setForm({
@@ -134,11 +130,7 @@ const Form = () => {
         <div className={style.background}>
         <form onSubmit={(e) => handleSubmit(e)} className={style.form}>
 
-            <div className={style.imgcontainer}>
-                <label>Image URL:</label>
-                <input type='text' value={form.image} onChange={(e)=>handleChange(e)} name='image'/>                
-                {/* <img src={form.image} alt={form.name} className={style.image}/> */}
-            </div>
+            
 
         <div className={style.fullcont}>
 
@@ -174,11 +166,10 @@ const Form = () => {
                     })                        
                     }
                 </select>
-                <label className={style.label}>Genres:</label>
                 {form.genres.map((g)=>(
                     <div className={style.boxopcion}>
                         <div className={style.opciontitle}>{g}</div>
-                        <button className={style.button} onClick={() => handleDeleteG(g)}  value={g}><span className={style.x}>X</span></button>                                               
+                        <button className={style.buttonx} onClick={()=>handleDeleteG(g)} value={g} key={g}><span className={style.x}>X</span></button>                                               
                     </div>
                     ))                    
                 }
@@ -190,19 +181,24 @@ const Form = () => {
                     <option className={style.option} value='' disabled hidden>Choose your platforms...</option>
                     {randomPlatforms.map((p)=>{
                         return(
-                            <option className={style.option} value={p} >{p}</option>
+                            <option className={style.option} value={p} key={p} >{p}</option>
                         )
                     })                        
                     }
                 </select>
-                <label className={style.label}>Platforms:</label>
                 {form.platforms.map((p)=> (
                     <div className={style.boxopcion}>
-                        <div className={style.option}>{p}</div>
-                        <button className={style.button} onClick={() => handleDeleteP(p)} key={p} value={p}><span className={style.x}>X</span></button>
+                        <div className={style.opciontitle}>{p}</div>
+                        <button className={style.buttonx} onClick={() => handleDeleteP(p)} key={p} value={p}><span className={style.x}>X</span></button>
                     </div>
                     ))                    
                 }
+            </div>
+
+            <div className={style.cont}>
+                <label  className={style.label}>Image URL:</label>
+                <input type='text' value={form.image} onChange={(e)=>handleChange(e)} name='image'/>                
+                {/* <img src={form.image} alt={form.name} className={style.image}/> */}
             </div>
             
             <div className={style.cont}>
