@@ -6,7 +6,7 @@ const Card = ({id,name,genres,image,rating}) => {
     
 
     return(
-        <div className={style.container}>
+        <div className={style.card}>
             <Link to={`/detail/${id}`} className={style.link}> 
             <div className={style.imgcontainer}>
                 <img src={image} alt={name} className={style.image}/>

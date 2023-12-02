@@ -37,8 +37,8 @@ const Filtrados = ({handleOrigin, handleGenres, handleOrder}) => {
 
                     <select onChange={e => handleOrigin(e)}>
                         <option value=''>Filter by origin</option>
-                        <option value="api">API</option>
-                        <option value="created">Created</option>
+                        <option value="api">Api</option>
+                        <option value="created">My creations</option>
                     </select>
                     
             </div>

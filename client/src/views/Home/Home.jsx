@@ -1,7 +1,9 @@
 import style from './Home.module.css';
 import Cards from '../../components/Cards/Cards';
 import Paginado from '../../components/Paginado/Paginado';
+import NavGame from '../../components/NavGame/NavGame';
 import Filtrados from '../../components/Filtrados/Filtrados';
+import Banner from '../../components/Banner/Banner';
 import About from '../../components/About/About';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,7 +18,7 @@ const Home = () => {
   // const displayVideogames = videogameSearch;
 
   const [currentPage, setCurrentPage] = useState(1) //lo seteo en 1 porque siempre arranco por la primer pagina
-  const gamesPerPage = 15//cantidad de juegos que debe haber por pagina
+  const gamesPerPage = 12//cantidad de juegos que debe haber por pagina
   const indexOfLastGame = currentPage * gamesPerPage // 1 * 15 = 15
   const indexOfFirstGame= indexOfLastGame - gamesPerPage // 15 - 15 = 0
   //const currentGames = displayVideogames.slice(indexOfFirstGame, indexOfLastGame) //para dividir la cantidad de juegos por pagina
@@ -66,23 +68,26 @@ function handleOrder(e) {
    <div className={style.background}>
    
       <div className={style.containerWrapper}>
+
+        <Banner/>
+        <NavGame/>
       
 
       {/* <div className={style.containerfilt}>
          <Filtrados handleOrigin={handleOrigin} handleGenres={handleGenres} handleOrder={handleOrder}/>
       </div> */}
+      
+      <Cards currentGames={currentGames}/>     
 
-      <div className={style.containercards}>
-        <Cards currentGames={currentGames}/>        
-      </div>
+      
 
-      <div className={style.containerpag}>
-        <Paginado gamesPerPage={gamesPerPage} allGames={displayVideogames.length} paginado={paginado} />
-      </div>
+       <div className={style.containerpag}>
+         <Paginado gamesPerPage={gamesPerPage} allGames={displayVideogames.length} paginado={paginado} />
+       </div>
 
-      <div>
-        <About/>
-      </div>
+       <div>
+         <About/>
+       </div>
 
     </div>
     </div>

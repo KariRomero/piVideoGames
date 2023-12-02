@@ -6,6 +6,7 @@ import Home from './views/Home/Home';
 import Detail from './views/Detail/Detail';
 import Form from './views/Form/Form';
 import Logo from './components/Logo/Logo';
+import Contact from './views/Contact/Contact';
 // import SearchByName from './components/SearchByName/SearchByName';
 
 
@@ -15,7 +16,7 @@ import Logo from './components/Logo/Logo';
 function App() {
 
   const location = useLocation()
-    const showNav = location.pathname === '/';
+    const show = location.pathname === '/';
     const showLogo = true;
 
   
@@ -24,15 +25,17 @@ function App() {
   return (
 
     <div className="App">
-      {showNav && <Nav/>}
-      {showLogo && <Logo/>}
+      {show && <Nav/>}
+      {show && <Logo/>}
+      
 
         <Routes>
 
           
           <Route path='/' element ={<Home/>}/>    
           <Route path='/detail/:id' element={<Detail/>}/>    
-          <Route path='/form' element={<Form/>}/>                   
+          <Route path='/form' element={<Form/>}/>    
+          <Route path='/contact' element={<Contact/>}/>               
          
 
         </Routes>

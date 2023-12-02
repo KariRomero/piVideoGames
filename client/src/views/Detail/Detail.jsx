@@ -4,6 +4,11 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getVideogame } from '../../redux/actions';
 import { Link } from 'react-router-dom';
+import { FaArrowLeft } from "react-icons/fa";
+
+
+
+//short_screenshots
 
 const Detail = () => {
 
@@ -28,12 +33,16 @@ const Detail = () => {
                     </div>
             
                     <div className={style.content}>                        
-                        <div className={style.name}>{videogame.name}</div> 
+                        <div className={style.name}>{videogame.name}
+                        <Link to='/'>
+                            <button className={style.button}>
+                                <FaArrowLeft/>
+                            </button>
+                            </Link>
+                        </div> 
 
                         <div className={style.buttoncont}>
-                            <Link to='/'>
-                            <button className={style.button}>Back</button>
-                            </Link>
+                            
                         </div>
                         
                         <article dangerouslySetInnerHTML={{ __html: videogame.description }} className={style.article} />

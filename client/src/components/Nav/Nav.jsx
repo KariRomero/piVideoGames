@@ -1,34 +1,34 @@
 import style from './Nav.module.css';
-import SearchBar from '../SearchBar/SearchBar';
+import { GiConsoleController } from "react-icons/gi";
 import { Link } from 'react-router-dom';
-import { getVideogames, clearSearch } from '../../redux/actions';
-import { useDispatch } from 'react-redux';
+
 
 const Nav = () => {
 
-    const dispatch = useDispatch();
-
-     const handleReset = () =>{
-         dispatch(getVideogames());
-        dispatch(clearSearch());
-    };
+    
 
     
     return(
         <div className={style.container}>            
             <div>
+                
+               
+
                 <Link to='/form' className={style.link}>
-                    <button className={style.button}>New Game</button>
+                    <button className={style.button}>
+                      
+                        <GiConsoleController/> New Game
+                           
+                    </button>
                 </Link>
+                <Link to='/contact' className={style.link}>
+                    <button className={style.button}>Contact</button>
+                </Link>    
 
-                <Link to='/home' className={style.link}>
-                    <button className={style.button}>Home</button>
-                </Link>     
-
-                <button className={style.button} onClick={handleReset}>Reset</button> 
+                {/* <button className={style.button} onClick={handleReset}>Reset</button>  */}
             </div>                            
 
-            <SearchBar/>
+            
         </div>
     )
 };
