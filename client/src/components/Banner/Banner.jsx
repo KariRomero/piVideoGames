@@ -4,9 +4,7 @@ import style from './Banner.module.css'
 const Banner = ()=>{
     return(
         <div className={style.bannerContainer} >
-
             <img src={bannerImage} alt='Zona Gamer banner' className={style.banerImg} />
-
         </div>
     )
 };

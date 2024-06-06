@@ -1,6 +1,5 @@
 import Card from '../Card/Card';
 import style from './Cards.module.css';
-//import imgNotFound from './Data/imgNotFound.jpg';
 import { useDispatch } from "react-redux";
 import { getVideogames } from '../../redux/actions';
 import { useEffect } from 'react';
@@ -14,11 +13,8 @@ const Cards = ({currentGames}) => {
       
       },[]);
 
-
     return(
-        <div className={style.container}>
-            
-            
+        <div className={style.container}>            
             {currentGames.length > 0 &&
             currentGames.map(videogame => {
                 return (<Card
@@ -29,9 +25,6 @@ const Cards = ({currentGames}) => {
                     image={videogame.image ? videogame.image : videogame.background_image }
                     rating={videogame.rating}
                     />)})}
-
-        
-
         </div>
     )
 };

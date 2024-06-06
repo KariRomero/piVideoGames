@@ -10,7 +10,6 @@ import {
     FILTER_BY_ORIGIN,
     CREATE_VIDEOGAME,
     CHANGE_PAGE,
-    // DELETE_VIDEOGAME
 } from './action-types';
 
 export const getVideogames= () => {
@@ -93,18 +92,4 @@ export const changePage = (page) => {
         payload:page
     })
 };
-
-
-
-
-
-// export function deleteVideoGame(id) {
-//     return function (dispatch) {
-//         return axios
-//             .delete(`/videogame/${id}`)
-//             .then(({ data }) => {
-//                 dispatch({ type: DELETE_VIDEOGAME, payload: data });
-//             });
-//     };
-// }
 

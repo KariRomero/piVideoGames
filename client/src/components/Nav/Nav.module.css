@@ -1,10 +1,9 @@
 .container{
     display: flex;
-    justify-content: end;   
+    justify-content: space-between;  
     width: 100%;         
     background-color: #78389E;   
     height: 5%;    
-    margin-top: 4%;    
 }
 
 .button {
@@ -20,6 +19,7 @@
     z-index: 1;
     font-family: inherit;
     color: #ffffff;
+    cursor: pointer;
    }
    
    .button::before {

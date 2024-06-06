@@ -3,8 +3,7 @@
     margin-top: 5px;
     margin-bottom: 5px;
     margin-right: 10px;
-    margin-left: 5px;
-    
+    margin-left: 5px;    
 }
 
 .input{    
@@ -27,6 +26,7 @@
     z-index: 1;
     font-family: inherit;
     color: #ffffff;
+    cursor: pointer;
    }
    
    .button::before {

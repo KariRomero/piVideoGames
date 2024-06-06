@@ -1,0 +1,16 @@
+.container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    font-size: xx-large;
+}
+
+.container a{
+    margin: 5px;
+    color: #ffffff;
+}
+
+.container a:hover{
+    color: rgba(178, 89, 236, 0.616);
+}

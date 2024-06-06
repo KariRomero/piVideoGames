@@ -8,9 +8,7 @@ import {
     FILTER_BY_ORDER, 
     FILTER_BY_ORIGIN,
     CREATE_VIDEOGAME,
-    CHANGE_PAGE,
-    DELETE_VIDEOGAME,
-    // DELETE_VIDEOGAME
+    CHANGE_PAGE
 } from './action-types';
 
 
@@ -20,8 +18,7 @@ const initialState = {
     videogameSearch:[],
     allGenres: [],
     copia:[],
-    page:0
-    
+    page:1   
     
 }
 
@@ -32,7 +29,6 @@ const reducer = (state = initialState,action) => {
                 ...state, 
                 videogames: action.payload,
                 copia: action.payload,
-                // videogameSearch: action.payload
             };
         case GET_VIDEOGAME:
             return{
@@ -68,7 +64,7 @@ const reducer = (state = initialState,action) => {
                     videogames: filtrado
                 };
         case FILTER_BY_ORDER:
-            let vgCopy = [...state.videogames]; //hago una copia de mi estado importante
+            let vgCopy = [...state.videogames]; 
             let ordenamiento
 
             switch (action.payload) {
@@ -147,18 +143,6 @@ const reducer = (state = initialState,action) => {
                 ...state,
                 page:action.payload
             };
-        // case DELETE_VIDEOGAME:
-        //     const filtered = state.copia.filter(
-        //         (game) => game.id !== action.payload
-        //     );
-    
-        //     return {
-        //         ...state,
-        //         copia: filtered.length > 0 ? filtered : "No games",
-        //         videogames: state.videogames.filter(
-        //             (game) => game.id !== action.payload
-        //         ),
-        //     };
         default:
             return{...state};
     }

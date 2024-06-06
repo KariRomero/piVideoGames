@@ -3,9 +3,8 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
-    width: 100%;
     background-color: rgba(196, 45, 45, 0);
-    position: relative;
-    z-index: 2;
-      
+    margin-right: 15px;    
   }
+
+

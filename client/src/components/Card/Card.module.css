@@ -5,9 +5,8 @@
   background-color: #000;
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  justify-content: flex-end;
   padding: 12px;
-  gap: 15px;
   border-radius: 8px;
   cursor: pointer;
   color: white;
@@ -25,8 +24,8 @@
   border-radius: 10px;
   background: linear-gradient(-45deg, #e81cff 0%, #40c9ff 100% );
   z-index: -10;
-  pointer-events: none;
   transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  pointer-events: none;
 }
 
 .card::after {
@@ -35,7 +34,6 @@
   position: absolute;
   inset: 0;
   background: linear-gradient(-45deg, #fc00ff 0%, #00dbde 100% );
-
   filter: blur(20px);
 }
 
@@ -71,12 +69,10 @@
 
 .imgcontainer{
     background-color: rgba(127, 255, 212, 0);
-    height: 170px;
+    height: 185px;
 }
 
 .image{
     height: 100%;
-    width: 100%;
-    /* border-top-left-radius: 3%;
-    border-top-right-radius: 3%; */       
+    width: 100%;    
 }
