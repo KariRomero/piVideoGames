@@ -223,7 +223,8 @@ const Form = () => {
                                 disabled hidden>
                                     Choose your genres...
                                 </option>
-                                {allGenres.map((g)=>{
+                                {Array.isArray(allGenres)
+                                ? allGenres.map((g)=>{
                                     return(
                                         <option 
                                         className={style.option} 
@@ -231,7 +232,8 @@ const Form = () => {
                                         value={g.name}>{g.name}
                                         </option>
                                     )
-                                })                        
+                                })
+                                : null                        
                             }
                             </select>
                             {form.genres.map((g)=>(
