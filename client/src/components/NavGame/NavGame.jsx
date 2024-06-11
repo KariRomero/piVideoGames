@@ -1,5 +1,5 @@
 import SearchBar from '../SearchBar/SearchBar';
-import Filtrados from '../Filtrados/Filtrados';
+// import Filtrados from '../Filtrados/Filtrados';
 import { getVideogames, filterByOrigin, filterByGenres, filterByOrder } from '../../redux/actions';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
@@ -43,7 +43,7 @@ const NavGame = ()=>{
  
     return(
         <div className={style.container}>                        
-            <Filtrados handleOrigin={handleOrigin} handleGenres={handleGenres} handleOrder={handleOrder}/>
+            {/* <Filtrados handleOrigin={handleOrigin} handleGenres={handleGenres} handleOrder={handleOrder}/> */}
             <SearchBar/>
         </div>
     )
