@@ -31,13 +31,13 @@ const Filtrados = ({handleOrigin, handleGenres, handleOrder}) => {
                         <option key={g.id} value={g.name}>{g.name}</option>
                     )
                 })} */}
-                {generos 
+                {Array.isArray(generos) 
                 ? generos.map(g => {
                     return (
                         <option key={g.id} value={g.name}>{g.name}</option>
                     )
                 })
-                : []
+                : null
             }
             </select>
 
