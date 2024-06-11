@@ -15,6 +15,7 @@ import {
 export const getVideogames= () => {
     return async function (dispatch){
         const response = await axios.get('https://pi-video-games-lake.vercel.app/videogames');
+        // const response = await axios.get('http://localhost:3001/videogames');
         const Videogames = response.data;
         dispatch({type: GET_VIDEOGAMES, payload: Videogames});
     }
@@ -23,6 +24,7 @@ export const getVideogames= () => {
 export const getVideogame = (id) => {
     return async function (dispatch){
         const response = await axios.get(`https://pi-video-games-lake.vercel.app/videogames/${id}`);
+        // const response = await axios.get(`http://localhost:3001/videogames/${id}`);
         const Videogame = response.data;
         dispatch ({type: GET_VIDEOGAME, payload:Videogame});
     }
@@ -31,6 +33,7 @@ export const getVideogame = (id) => {
 export const searchByName = (name) => {
     return async function (dispatch){
         const response = await axios.get(`https://pi-video-games-lake.vercel.app/videogames?name=${name}`);
+        // const response = await axios.get(`http://localhost:3001/videogames?name=${name}`);
         const Videogame = response.data;
         dispatch ({type: SEARCH_BY_NAME, payload: Videogame});    
     }
@@ -45,6 +48,7 @@ export const clearSearch = () => {
 export const getGenres = () => {
     return async function (dispatch) {
         const response = await axios.get('https://pi-video-games-lake.vercel.app/genres')
+        // const response = await axios.get('http://localhost:3001/genres')
         const genres = response.data
         dispatch({ type: GET_GENRES, payload: genres });        
     }
@@ -76,6 +80,7 @@ export const createVideogame = (videogame) => {
         try {
             console.log(videogame);
             const { data } = await axios.post(`https://pi-video-games-lake.vercel.app/videogames`, videogame);
+            // const { data } = await axios.post(`http://localhost:3001/videogames`, videogame);
             return dispatch({
                 type: CREATE_VIDEOGAME,
                 payload: data

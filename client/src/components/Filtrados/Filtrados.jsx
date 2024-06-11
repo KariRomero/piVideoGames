@@ -8,7 +8,7 @@ const Filtrados = ({handleOrigin, handleGenres, handleOrder}) => {
     const dispatch = useDispatch() ;
     const generos = useSelector(state => state.allGenres);
    
-    useEffect(() => { //
+    useEffect(() => { 
         dispatch(getGenres())        
     }, [])
 
@@ -26,11 +26,19 @@ const Filtrados = ({handleOrigin, handleGenres, handleOrder}) => {
 
             <select id="genre" onChange={e => handleGenres(e)}>
                 <option value=''>All</option>
-                {generos && generos.map(g => {
+                {/* {generos && generos.map(g => {
                     return (
                         <option key={g.id} value={g.name}>{g.name}</option>
                     )
-                })}
+                })} */}
+                {generos 
+                ? generos.map(g => {
+                    return (
+                        <option key={g.id} value={g.name}>{g.name}</option>
+                    )
+                })
+                : []
+            }
             </select>
 
             <select onChange={e => handleOrigin(e)}>
