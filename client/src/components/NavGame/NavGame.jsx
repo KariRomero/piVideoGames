@@ -43,7 +43,7 @@ const NavGame = ()=>{
  
     return(
         <div className={style.container}>                        
-            {/* <Filtrados handleOrigin={handleOrigin} handleGenres={handleGenres} handleOrder={handleOrder}/> */}
+            <Filtrados handleOrigin={handleOrigin} handleGenres={handleGenres} handleOrder={handleOrder}/>
             <SearchBar/>
         </div>
     )
