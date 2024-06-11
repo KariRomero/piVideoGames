@@ -1,5 +1,5 @@
 import SearchBar from '../SearchBar/SearchBar';
-// import Filtrados from '../Filtrados/Filtrados';
+import Filtrados from '../Filtrados/Filtrados';
 import { getVideogames, filterByOrigin, filterByGenres, filterByOrder } from '../../redux/actions';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
