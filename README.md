@@ -26,7 +26,6 @@ DATABASE=reservas
 
 por ultimo levantar front y back mediante el comando **npm start**.
 
-Comparto [**video**](https://vimeo.com/854233470?share=copy) para visualizar su funcionamiento
 
 
 
